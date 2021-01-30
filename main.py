@@ -2,13 +2,14 @@
 
 import sys
 import random
+import re
 
-VALID_INPUTS = ['l', 'u', 's', 'n']
+VALID_INPUTS = ['l', 'u', 'n', 's']
 
 char_options = {'l': 'abcdefghijklmnopqrstuvwxyz',
                 'u': 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
                 'n': '1234567890',
-                's': '`¬!"£$%^&*()_-=+\{\}[];:@\'#/.>,<\|?~'}
+                's': '`¬!"£$%^&*()-=+\{\}[];:@\'#/.>,<\|?~'}
 
 def gen_password(criteria = 'l', password_length = 10):
     password = ''
@@ -16,9 +17,27 @@ def gen_password(criteria = 'l', password_length = 10):
         character_pick = criteria[random.randrange(len(criteria))]
         password += random.choice(char_options[character_pick])
     
-    return password
+    valid_password = validate_password(password, criteria)
 
+    return valid_password
 
+def validate_password(password, criteria):
+    
+    is_valid = []
+    
+    for crit in criteria:
+        check_for_char = [True for c in password if c in char_options[crit]]
+        if sum(check_for_char) > 0:
+            is_valid.append(True)
+        else:
+            is_valid.append(False)
+    
+    if sum(is_valid) == len(criteria):
+        return password
+    else:
+        return gen_password(criteria, len(password))
+
+    
 
 def error_message(n=0):
     if n == 0:
