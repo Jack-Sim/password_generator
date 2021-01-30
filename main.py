@@ -2,7 +2,6 @@
 
 import sys
 import random
-import re
 
 VALID_INPUTS = ['l', 'u', 'n', 's']
 
@@ -12,6 +11,23 @@ char_options = {'l': 'abcdefghijklmnopqrstuvwxyz',
                 's': '`¬!"£$%^&*()-=+\{\}[];:@\'#/.>,<\|?~'}
 
 def gen_password(criteria = 'l', password_length = 10):
+
+    """
+    gen_password is a function to create a password with the
+    criteria and the length specified.
+
+        parameters:
+            criteria (str): 
+                A string with the groups of characters that should be 
+                included in the password
+            password_length (int): 
+                Desired password length
+
+        Returns:
+            password (str): 
+                The randomly generated password 
+    """
+
     password = ''
     for i in range(password_length):
         character_pick = criteria[random.randrange(len(criteria))]
@@ -22,6 +38,24 @@ def gen_password(criteria = 'l', password_length = 10):
     return valid_password
 
 def validate_password(password, criteria):
+
+    """
+    validate_password will check the password created and ensure it meets 
+    the specified criteria. If the password does not meet all criteria, 
+    the gen_password function is rerun. If the password passes the validation
+    then the password is returned.
+
+        parameters:
+            password (str): 
+                The generated password to be validated
+            criteria (str): 
+                A string with the groups of characters that should be 
+                included in the password
+
+        Returns:
+            password (str): 
+                The validated password, once the checks have been passed 
+    """
     
     is_valid = []
     
@@ -40,6 +74,13 @@ def validate_password(password, criteria):
     
 
 def error_message(n=0):
+    """
+    A function to print the desired error messages to the console
+    The input n determines the error to be displayed
+        Parameters:
+            n (int):
+                The number of the error to be displayed
+    """
     if n == 0:
         print("[ERROR] - Not enough arguments, please refer to help menu using -h")
     elif n == 1:
@@ -48,6 +89,9 @@ def error_message(n=0):
         print("[ERROR] - Too many parameters, please refer to help menu using -h")
 
 def help_menu():
+    """
+    Function to print the help menu to the console.
+    """
     print("----------------- Password Generator ------------------")
     print("$ A program to create passwords of different strenghts")
     print("-------------------------------------------------------")
@@ -86,7 +130,6 @@ def main():
         return
 
     else:
-        print(inputs)
         print(gen_password(criteria = inputs[0].replace('-', ''), 
                             password_length = int(inputs[1])))
 
