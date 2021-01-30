@@ -4,10 +4,21 @@ import sys
 import random
 
 VALID_INPUTS = ['l', 'u', 's', 'n']
-lower_letters = 'abcdefghijklmnopqrstuvwxyz'
-capital_letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-numbers = '1234567890'
-symbols = '`¬!"£$%^&*()_-=+\{\}[];:@\'#/.>,<\|?~'
+
+char_options = {'l': 'abcdefghijklmnopqrstuvwxyz',
+                'u': 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+                'n': '1234567890',
+                's': '`¬!"£$%^&*()_-=+\{\}[];:@\'#/.>,<\|?~'}
+
+def gen_password(criteria = 'l', password_length = 10):
+    password = ''
+    for i in range(password_length):
+        character_pick = criteria[random.randrange(len(criteria))]
+        password += random.choice(char_options[character_pick])
+    
+    return password
+
+
 
 def error_message(n=0):
     if n == 0:
@@ -56,7 +67,9 @@ def main():
         return
 
     else:
-        print(validate_options)
+        print(inputs)
+        print(gen_password(criteria = inputs[0].replace('-', ''), 
+                            password_length = int(inputs[1])))
 
 if __name__ == '__main__':
     main()
