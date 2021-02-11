@@ -28,4 +28,5 @@ def main():
                             password_length = int(inputs[1])))
 
 if __name__ == '__main__':
+    print("hello")
     main()
