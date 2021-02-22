@@ -7,6 +7,7 @@ from password_methods.helper_functions  import *
 def main():
     inputs = sys.argv
     if len(inputs) < 2:
+        print("hello")
         error_message(n = 0)
         return
     elif len(inputs) > 3:
