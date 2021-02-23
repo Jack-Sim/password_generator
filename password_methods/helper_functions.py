@@ -1,4 +1,6 @@
-def error_message(n=0):
+"""Module that contains helper functions for the password generator"""
+
+def error_message(error_code=0):
     """
     A function to print the desired error messages to the console
     The input n determines the error to be displayed
@@ -6,11 +8,11 @@ def error_message(n=0):
             n (int):
                 The number of the error to be displayed
     """
-    if n == 0:
+    if error_code == 0:
         print("[ERROR] - Not enough arguments, please refer to help menu using -h")
-    elif n == 1:
+    elif error_code == 1:
         print("[ERROR] - Invalid options, please refer to help menu using -h")
-    elif n == 2:
+    elif error_code == 2:
         print("[ERROR] - Too many parameters, please refer to help menu using -h")
 
 def help_menu():
